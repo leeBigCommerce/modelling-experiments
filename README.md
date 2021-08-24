@@ -84,6 +84,9 @@ type Book = PhysicalBook | DigitalBook;
 - What metrics can we use to discriminate between options?
 - Is it possible to judge from an interface alone?
 - Are different models 'right' at different life-cycles of our codebase?
+- Do unions and optionals inevitably cause branches in consuming code? If so, can we minimize or flatten this effect?
+- If we go for any kind of union, what's the best way to split them apart again: Type Guards, Type Codes, something else?
+- Are any of these examples/solutions peculiar to TypeScript? If so, do other languages avoid the problem or offer better solutions?
 
 &nbsp;
 
