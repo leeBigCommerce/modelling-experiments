@@ -1,3 +1,99 @@
+# An exploration of models
+
+The contrived problem is one of an online bookstore that sells both physical and digital books.
+
+How should a mixed set of these books be modelled?
+
+I.E. how do we define `Book` for the following kind of function:
+
+```typescript
+const getBooks = (): Book[] => [
+  {
+    title: "Catch-22 - Hardback",
+    price: 899,
+    weightG: 442
+  },
+  {
+    title: "Catch-22 - EBook",
+    price: 499,
+    sizeKB: 2600
+  }
+];
+```
+
+## Our multiple choice options...
+
+###  A: a single interface with optional attributes
+
+```typescript
+interface Book {
+  title: string;
+  price: number;
+  weightG?: number;
+  sizeKB?: number;
+}
+```
+
+###  B: a single interface with a union attribute
+(we'd reshape the output of `getBooks` above accordingly)
+
+```typescript
+interface DigitalSpecs {
+  sizeKB: number;
+}
+
+
+interface PhysicalSpecs {
+  weightG: number;
+}
+
+interface Book {
+  title: string;
+  price: number;
+  specs: DigitalSpecs | PhysicalSpecs;
+}
+```
+
+###  C: a union of entities, each extending a base interface
+
+```typescript
+interface BookBase {
+  title: string;
+  price: number;
+}
+
+interface PhysicalBook extends BookBase {
+  weightG: number;
+}
+
+interface DigitalBook extends BookBase {
+  sizeKB: number;
+}
+
+type Book = PhysicalBook | DigitalBook;
+```
+
+###  D: something else I haven't thought of
+
+```typescript
+// ????
+```
+
+## Questions
+
+- What metrics can we use to discriminate between options?
+- Is it possible to judge from an interface alone?
+- Are different models 'right' at different life-cycles of our codebase?
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
